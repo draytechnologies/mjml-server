@@ -18,8 +18,9 @@ jobs:
             docker-compose pull --include-deps mjml
             docker-compose build mjml
       - run:
-          name: Test
+          name: Format and Test
           command: |
+            docker-compose run mjml npm run format:ci
             docker-compose run mjml npm run test:ci
       - sonarcloud/scan
       - store_artifacts:
