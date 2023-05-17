@@ -1,4 +1,19 @@
-FROM node:18-alpine3.16
+FROM node:18-alpine3.16 AS base
+
+RUN set -ex \
+    && apk --no-cache upgrade \
+    && apk --no-cache add curl ca-certificates \
+    && update-ca-certificates
+WORKDIR /usr/src/app
+COPY ["package.json", "package-lock.json", "/usr/src/app/"]
+EXPOSE 8080
+
+FROM base AS dev
+RUN npm ci --ignore-scripts
+COPY ["newrelic.js", "./lib",  "/usr/src/app/"]
+
+
+FROM base AS production
 
 ENV NODE_ENV=production
 
@@ -13,19 +28,8 @@ ENV HEALTHCHECK=true
 ENV CHARSET="utf8"
 ENV DEFAULT_RESPONSE_CONTENT_TYPE="text/html; charset=utf-8"
 
-WORKDIR /app
-
-COPY package* ./
-
-RUN set -ex \
-    && apk --no-cache upgrade \
-    && apk --no-cache add curl ca-certificates \
-    && update-ca-certificates \
-    && npm ci --ignore-scripts
-
-COPY /lib ./lib
-
+RUN npm ci --ignore-scripts --only=prod
+COPY ["newrelic.js", "./lib",  "/usr/src/app/"]
 USER node
-EXPOSE 8080
+CMD ["node", "./lib/index.js"]
 
-ENTRYPOINT [ "node", "lib/index.js" ]
