@@ -31,5 +31,5 @@ ENV DEFAULT_RESPONSE_CONTENT_TYPE="text/html; charset=utf-8"
 RUN npm ci --ignore-scripts --only=prod
 COPY ["newrelic.js", "./lib",  "/usr/src/app/"]
 USER node
-CMD ["node", "./lib/index.js"]
+CMD ["node", "./index.js"]
 

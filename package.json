@@ -3,6 +3,8 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
+    "format": "prettier --write .",
+    "format:ci": "prettier --check .",
     "test": "jest",
     "test:ci": "jest --coverage --ci --runInBand --reporters=default --reporters=jest-junit"
   },
@@ -15,6 +17,7 @@
   "devDependencies": {
     "jest": "^29.5.0",
     "jest-junit": "^16.0.0",
+    "prettier": "^2.8.8",
     "supertest": "^6.3.3"
   }
 }

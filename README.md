@@ -23,11 +23,12 @@ Due to various challenges this image sports the following features:
 - Supports healthchecks.
 
 # Table of contents
-  - [Overview](#overview)
-  - [Defaults](#defaults)
-  - [Development](#development)
-  - [Troubleshooting](#troubleshooting)
-    - [Kubernetes](#kubernetes)
+
+- [Overview](#overview)
+- [Defaults](#defaults)
+- [Development](#development)
+- [Troubleshooting](#troubleshooting)
+  - [Kubernetes](#kubernetes)
 
 ## Overview
 
@@ -42,7 +43,6 @@ docker-compose up
 cd test
 curl --data "@raw.mjml" http://localhost:8080
 ```
-
 
 ## Defaults
 
