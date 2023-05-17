@@ -1,5 +1,18 @@
 # MJML docker microservice / server
 
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=draytechnologies_mjml-server&metric=ncloc&token=ad35c31c0d1291c4c0be372df94b6b7f4daa7577)](https://sonarcloud.io/summary/new_code?id=draytechnologies_mjml-server)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=draytechnologies_mjml-server&metric=coverage&token=ad35c31c0d1291c4c0be372df94b6b7f4daa7577)](https://sonarcloud.io/summary/new_code?id=draytechnologies_mjml-server)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=draytechnologies_mjml-server&metric=duplicated_lines_density&token=ad35c31c0d1291c4c0be372df94b6b7f4daa7577)](https://sonarcloud.io/summary/new_code?id=draytechnologies_mjml-server)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/draytechnologies/mjml-server/tree/main.svg?style=shield&circle-token=5ab0c3d18bca57fddb92c020e7cfb94f7264ee75)](https://dl.circleci.com/status-badge/redirect/gh/draytechnologies/mjml-server/tree/main)
+
+[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/draytechnologies/mjml-server/main/main/badge.svg?window=30d&circle-token=5ab0c3d18bca57fddb92c020e7cfb94f7264ee75)](https://app.circleci.com/insights/github/draytechnologies/mjml-server/workflows/main/overview?branch=main&reporting-window=last-30-days&insights-snapshot=true)
+
+![CI Releases](https://img.shields.io/badge/RELEASES-ENABLED-success?style=flat)
+
+Our default release pipeline is enabled for this repository. Merge to deploy to stage; Release/tag to deploy to production.
+
+## Description
+
 Standalone mjml server, listening on port 8080/tcp.
 
 Due to various challenges this image sports the following features:
@@ -85,24 +98,4 @@ spec:
         command:
         - curl - 'http://localhost:8080/health/readiness'
       initialDelaySeconds: 25
-```
-
-### Docker
-
-If you want to rely on the Makefile or build for multiple architectures, ensure you have the experimental features activated for Docker and you can use [docker buildx](https://docs.docker.com/buildx/working-with-buildx/).
-
-Setup on my Ubuntu 20.04 workstation was as follows, based on the docs mentioned above:
-
-```bash
-# Install additional platforms for the default node on the current host linux os
-docker run --privileged --rm tonistiigi/binfmt --install all
-
-# create a separate endpoint that uses the default node
-docker buildx create --use mjml-server default
-
-# After that a local build should be possible with something like
-docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 -t [registry-and-tag] --push .
-
-# ... or if you want to use it locally with the mjml-server tag
-docker buildx build -f Dockerfile --platform linux/amd64,linux/arm64 -t mjml-server --load .
 ```

@@ -4,6 +4,33 @@ orbs:
   gcp-gcr: circleci/gcp-gcr@0.15.0
   slack: circleci/slack@4.12.0
 jobs:
+  test:
+    machine:
+      docker_layer_caching: true
+    resource_class: medium
+    environment:
+      COMPOSE_FILE: ./.circleci/docker-compose.ci.yml
+    steps:
+      - checkout
+      - run:
+          name: Build dev image
+          command: |
+            docker-compose pull --include-deps mjml
+            docker-compose build mjml
+      - run:
+          name: Test
+          command: |
+            docker-compose run mjml npm run test:ci
+      - sonarcloud/scan
+      - store_artifacts:
+          path: reports
+      - store_test_results:
+          path: reports/tests
+      - slack/notify:
+          branch_pattern: main
+          event: fail
+          template: basic_fail_1
+
   build_and_push:
     machine: true
     resource_class: medium
@@ -50,7 +77,16 @@ jobs:
 workflows:
   main:
     jobs:
+      - test:
+          context:
+            - SonarCloud
+            - slack-secrets
+          filters:
+            tags:
+              ignore: /.*/
       - build_and_push:
+          requires:
+            - test
           context:
             - GCP-parade-devops
             - slack-secrets

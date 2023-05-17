@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  mjml:
+    build:
+      context: ..
+      target: dev
+      args:
+        - CI=true
+    volumes:
+      - "../reports/coverage/:/usr/src/app/coverage/"
+      - "../reports/tests/:/usr/src/app/tests/"
+    environment:
+      - CI=true
+      - JEST_JUNIT_OUTPUT_DIR=/usr/src/app/tests/
+      - MJML_KEEP_COMMENTS=false
+      - MJML_VALIDATION_LEVEL=strict
+      - MJML_BEAUTIFY=false
