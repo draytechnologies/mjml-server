@@ -26,7 +26,7 @@ exports.config = {
      */
     filepath: require("path").join(
       require("os").homedir(),
-      "newrelic_agent.log"
+      "newrelic_agent.log",
     ),
   },
   /**
