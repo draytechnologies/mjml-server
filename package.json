@@ -12,7 +12,7 @@
     "body-parser": "^1.20.2",
     "express": "^4.21.1",
     "mjml": "^4.15.3",
-    "newrelic": "^12.5.2"
+    "newrelic": "^12.6.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
