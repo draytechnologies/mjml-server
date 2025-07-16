@@ -1,1 +1,2 @@
-* @draytechnologies/backend
+.circleci/config.yml @draytechnologies/platform
+* @draytechnologies/product-eng
