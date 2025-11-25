@@ -9,7 +9,7 @@
     "test:ci": "jest --coverage --ci --runInBand --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.1",
     "express": "^5.1.0",
     "mjml": "^4.15.3",
     "newrelic": "^12.21.0"
