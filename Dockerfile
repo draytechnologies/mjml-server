@@ -10,7 +10,7 @@ EXPOSE 8080
 
 FROM base AS dev
 RUN npm ci --ignore-scripts
-COPY ["newrelic.js", "./lib",  "/usr/src/app/"]
+COPY ["./lib",  "/usr/src/app/"]
 
 
 FROM base AS production
@@ -29,7 +29,7 @@ ENV CHARSET="utf8"
 ENV DEFAULT_RESPONSE_CONTENT_TYPE="text/html; charset=utf-8"
 
 RUN npm ci --ignore-scripts --only=prod
-COPY ["newrelic.js", "./lib",  "/usr/src/app/"]
+COPY ["./lib",  "/usr/src/app/"]
 USER node
 CMD ["node", "./index.js"]
 
