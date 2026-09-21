@@ -9,6 +9,11 @@
     "test:ci": "jest --coverage --ci --runInBand --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.222.0",
+    "@opentelemetry/instrumentation-express": "^0.70.0",
+    "@opentelemetry/instrumentation-http": "^0.222.0",
+    "@opentelemetry/sdk-node": "^0.222.0",
     "body-parser": "^2.2.1",
     "express": "^5.1.0",
     "mjml": "^4.15.3",
